@@ -32,7 +32,7 @@ function Welcome(props){
     }
 
     const obtenerPaises=async()=>{
-     await   axios.get(`http://localhost:5130/listarPais`)
+     await   axios.get(`http://localhost:5032/api/pais/listarPais`)
         .then((res) => {
           const paises = res.data;       
           setListPais(paises);
@@ -42,7 +42,7 @@ function Welcome(props){
     }
     
     const obtenerPersonas=async()=>{
-        await    axios.get(`http://localhost:5130/listarPersonas`)
+        await    axios.get(`http://localhost:5032/api/persona/listarPersona`)
         .then(async(res) => {
           const personas = res.data; 
           setListPersonas(personas);
@@ -54,7 +54,6 @@ function Welcome(props){
     const handleSubmit=(e)=>{
         e.preventDefault();
         guardarPersona();
-        console.log(form)
     };
     const guardarPersona=()=>{
       let per=  {
@@ -76,16 +75,14 @@ function Welcome(props){
     }
 
     const crearPersona=(persona)=>{
-        axios.post('http://localhost:5130/crearpersona', persona).then(res => {
-            console.log(res);
+        axios.post('http://localhost:5032/api/persona/crearpersona', persona).then(res => {
             obtenerPersonas();
             }).catch(err => {
             console.log(err);
         });
     }
     const actualizarPersona=(persona)=>{
-        axios.post('http://localhost:5130/actualizarPersona', persona).then(res => {
-            console.log(res);
+        axios.post('http://localhost:5032/api/persona/actualizarPersona', persona).then(res => {
             obtenerPersonas();
             }).catch(err => {
             console.log(err);
@@ -99,7 +96,8 @@ function Welcome(props){
                 idPersona:persona.idPersona,
                 nombres: persona.nombres,
                 apellidos: persona.apellidos, 
-                ciudad: persona.ciudad, idPais: persona.pais.idPais
+                ciudad: persona.ciudad, 
+                idPais: persona.pais.idPais
         })
         setTituloModal('Actualizar Persona');
     }
@@ -119,7 +117,7 @@ function Welcome(props){
      };
 
     const eliminarPersona=(id)=>{
-        axios.post('http://localhost:5130/eliminarPersona?id='+id, form).then(res => {                 
+        axios.post('http://localhost:5032/api/persona/eliminarPersona?id='+id, form).then(res => {                 
             obtenerPersonas();
         }).catch(err => {
                  console.log(err);
