@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import Welcome from './components/welcome';
+import React, { useState, useEffect  } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Modal, Button} from 'react-bootstrap';
+import axios from 'axios';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  
+
+class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {saludo:"hola como esatas"}; 
+  }
+ 
+  render() {
+    return (<div>
+      <Welcome name={this.state.saludo} />
+    </div>);
+  }
 }
 
 export default App;
